@@ -13,14 +13,17 @@ class Task(models.Model):
     ]
 
     title = models.CharField(max_length=150)
-    description = models.CharField(max_length=500)
-    due_date = models.DateField()
-    priority = models.CharField(max_length=30, choices=PRIORITY)
-    status = models.CharField(max_length=30, choices=STATUS)
+    description = models.TextField(blank=True)
+    due_date = models.DateField(null=True, blank=True)
+    priority = models.CharField(max_length=30, choices=PRIORITY, default="MEDIUM")
+    status = models.CharField(max_length=30, choices=STATUS, default="PENDING")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.status})"
     
     class Meta:
         db_table = "tasks"
+        ordering = ['-created_at']
   
