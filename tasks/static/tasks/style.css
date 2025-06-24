@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 70rem;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  min-height: 40rem;
+}
+
+header {
+  border-bottom: 1px solid black;
+}
+
+nav {
+  padding: 1rem 2rem;
+}
+
+nav a {
+  font-size: 1.6rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tasks {
+  padding: 2rem;
+}
+
+.tasks .task {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+.task div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task p {
+  font-size: 1.2rem;
+}
