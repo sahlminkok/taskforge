@@ -1,0 +1,18 @@
+{% extends "tasks/main.html" %}
+
+{% block main %}
+  <section class="tasks">
+    {% for task in tasks %}
+    <div class="task">
+      <div>
+        <a href=""><h3>{{ task.title }}</h3></a>
+        <p>{{ task.priority }}</p>
+      </div>
+      <div>
+        <p>{{ task.status }}</p>
+        <p>{{ task.due_date }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+{% endblock main %}
