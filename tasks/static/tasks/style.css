@@ -65,3 +65,19 @@ h3 {
 .task p {
   font-size: 1.2rem;
 }
+
+.detail {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.detail h1 {
+  font-size: 2.2rem;
+}
+
+.detail p,
+.detail a {
+  font-size: 1.6rem;
+}

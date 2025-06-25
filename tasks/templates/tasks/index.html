@@ -5,7 +5,7 @@
     {% for task in tasks %}
     <div class="task">
       <div>
-        <a href=""><h3>{{ task.title }}</h3></a>
+        <a href="{% url 'detail' task.id %}"><h3>{{ task.title }}</h3></a>
         <p>{{ task.priority }}</p>
       </div>
       <div>

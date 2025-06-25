@@ -1,0 +1,16 @@
+{% extends "tasks/main.html" %}
+
+{% block main %}
+<section class="detail">
+  <h1>{{ task.title }}</h1>
+  <p>Priority: {{ task.priority }}</p>
+  <p>Status: {{ task.status }}</p>
+  <p>Due Date: {{ task.due_date }}</p>
+  <p>{{ task.description  }}</p>
+
+  <div>
+    <a href="{% url 'index' %}">Edit</a>
+    <a href="{% url 'index' %}">Delete</a>
+  </div>
+</section>
+{% endblock main %}
