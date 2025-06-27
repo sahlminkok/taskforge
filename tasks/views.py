@@ -38,3 +38,13 @@ def update_task(request, pk):
 
     context = { 'form': form }
     return render(request, 'tasks/update_task.html', context)
+
+def delete_task(request, pk):
+    task = get_object_or_404(Task, id=pk)
+
+    if request.method == 'POST':
+        task.delete()
+        return redirect('index')
+
+    context = { 'task': task }
+    return render(request, 'tasks/delete_confirmation.html', context)
