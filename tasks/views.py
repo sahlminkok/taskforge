@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task
 from .forms import TaskForm
 
@@ -23,3 +23,18 @@ def create_task(request):
 
     context = { 'form': form }
     return render(request, 'tasks/create_task.html', context)
+
+def update_task(request, pk):
+    task = get_object_or_404(Task, id=pk)
+    form = TaskForm(instance=task)
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('detail', pk=task.id)
+    else:
+        form = TaskForm(instance=task)
+
+    context = { 'form': form }
+    return render(request, 'tasks/update_task.html', context)
