@@ -6,21 +6,29 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect('users:login')
 
-    tasks = Task.objects.all()
+    tasks = request.user.tasks.all()
     context = { 'tasks': tasks }
     return render(request, 'tasks/index.html', context)
 
 def detail(request, pk):
-    task = Task.objects.get(id=pk)
+    if not request.user.is_authenticated:
+        return redirect('users:login')
+
+    task = get_object_or_404(Task, id=pk, user=request.user)
     context = { 'task': task }
     return render(request, 'tasks/detail.html', context)
 
 def create_task(request):
+    if not request.user.is_authenticated:
+        return redirect('users:login')
+
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('index')
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+            return redirect('tasks:index')
     else:
         form = TaskForm()
 
@@ -28,14 +36,17 @@ def create_task(request):
     return render(request, 'tasks/create_task.html', context)
 
 def update_task(request, pk):
-    task = get_object_or_404(Task, id=pk)
+    if not request.user.is_authenticated:
+        return redirect('users:login')
+
+    task = get_object_or_404(Task, id=pk, user=request.user)
     form = TaskForm(instance=task)
 
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('detail', pk=task.id)
+            return redirect('tasks:detail', pk=task.id)
     else:
         form = TaskForm(instance=task)
 
@@ -43,11 +54,14 @@ def update_task(request, pk):
     return render(request, 'tasks/update_task.html', context)
 
 def delete_task(request, pk):
-    task = get_object_or_404(Task, id=pk)
+    if not request.user.is_authenticated:
+        return redirect('users:login')
+    
+    task = get_object_or_404(Task, id=pk, user=request.user)
 
     if request.method == 'POST':
         task.delete()
-        return redirect('index')
+        return redirect('tasks:index')
 
     context = { 'task': task }
     return render(request, 'tasks/delete_confirmation.html', context)

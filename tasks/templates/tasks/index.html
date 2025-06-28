@@ -17,6 +17,8 @@
         <p>Due Date: {{ task.due_date }}</p>
       </div>
     </div>
+    {% empty %}
+    <h1>You don't have any task yet. Please click to add a task</h1>
     {% endfor %}
   </section>
 {% endblock main %}
