@@ -1,14 +1,17 @@
 {% extends "tasks/main.html" %}
 
 {% block main %}
-  {% if message %}
-    <div>{{ message }}</div>
-  {% endif %}
+  <section class="form-section">
+    <h2>Login</h2>
+    {% if message %}
+      <div class="message">{{ message }}</div>
+    {% endif %}
 
-  <form action="" method="post">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Enter your username...">
-    <input type="password" name="password" placeholder="Enter your password...">
-    <input type="submit" value="Login">
-  </form>
+    <form action="" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Enter your username..." class="form-control">
+      <input type="password" name="password" placeholder="Enter your password..." class="form-control">
+      <input type="submit" value="Login" class="btn btn-primary">
+    </form>
+  </section>
 {% endblock main %}
