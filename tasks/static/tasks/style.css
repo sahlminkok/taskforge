@@ -21,7 +21,7 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Changed from inherit for clarity */
+  box-sizing: border-box;
 }
 
 html {
@@ -34,99 +34,117 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Use min-height to allow content to push body height */
+  min-height: 100vh;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Slightly more modern font */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--light-bg);
   color: var(--text-color);
-  padding: 2rem; /* Add some padding around the main container */
+  padding: 2rem;
 }
 
 /* --- Container Layout --- */
 .container {
-  width: 100%; /* Make it fluid for responsiveness */
-  max-width: 80rem; /* Set a max-width for larger screens */
+  width: 100%;
+  max-width: 80rem;
   background-color: #fff;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
   min-height: 40rem;
   display: flex;
-  flex-direction: column; /* To stack header, nav, and content */
+  flex-direction: column;
 }
 
 /* --- Header & Navigation --- */
 header {
   border-bottom: 1px solid var(--border-color);
-  background-color: var(--dark-bg); /* Dark background for header */
-  padding: 1rem 2rem; /* Consistent padding */
+  background-color: var(--dark-bg);
+  padding: 1rem 2rem;
   border-top-left-radius: var(--radius-md);
   border-top-right-radius: var(--radius-md);
 }
 
 nav {
   display: flex;
-  gap: 2rem; /* Increased gap */
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between; /* To push user info/logout to the right */
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 2rem;
   align-items: center;
 }
 
+nav .auth-info {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+nav p {
+  /* Styling for "Hi, username" */
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0; /* Remove default paragraph margin */
+}
+
 nav a {
-  font-size: 1.8rem; /* Slightly larger nav links */
+  font-size: 1.8rem;
   text-decoration: none;
   font-weight: bold;
-  color: #fff; /* White text for dark background */
+  color: #fff;
   transition: color 0.2s ease-in-out;
 }
 
 nav a:hover {
-  color: var(--primary-color); /* Highlight on hover */
+  color: var(--primary-color);
 }
 
 /* --- Main Content Sections --- */
 .tasks,
 .detail,
 .form-section {
-  /* Added .form-section for forms */
   padding: 2rem;
-  flex-grow: 1; /* Allows content sections to take available space */
+  flex-grow: 1;
 }
 
 /* --- Task List Specifics --- */
 .tasks {
-  padding-top: 3rem; /* More space above tasks list */
+  padding-top: 3rem;
 }
 
 .tasks .task {
   display: flex;
-  flex-direction: column; /* Stack elements vertically on small screens */
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start; /* Align items to the start */
-  margin-bottom: 2.5rem; /* More space between tasks */
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px dashed var(--border-color); /* Subtle separator */
+  border-bottom: 1px dashed var(--border-color);
 }
 
 .tasks .task:last-child {
   margin-bottom: 0;
-  border-bottom: none; /* No border for the last item */
+  border-bottom: none;
 }
 
 .tasks .task > div {
-  /* Target the div wrappers inside .task */
   display: flex;
   flex-direction: column;
-  gap: 0.8rem; /* Space between elements within task details */
+  gap: 0.8rem;
 }
 
 .tasks .task > div:first-child {
-  margin-bottom: 1.5rem; /* Space between title/priority and status/due date on stacked layout */
+  margin-bottom: 1.5rem;
 }
 
-/* When screen is wide enough, put them side by side */
 @media (min-width: 600px) {
   .tasks .task {
     flex-direction: row;
-    align-items: center; /* Center vertically when side-by-side */
+    align-items: center;
   }
   .tasks .task > div:first-child {
     margin-bottom: 0;
@@ -134,7 +152,7 @@ nav a:hover {
 }
 
 h1 {
-  font-size: 2.8rem; /* Larger heading */
+  font-size: 2.8rem;
   margin-bottom: 1.5rem;
   color: var(--primary-color);
 }
@@ -146,17 +164,16 @@ h2 {
 }
 
 h3 {
-  font-size: 2.2rem; /* Slightly larger task title */
+  font-size: 2.2rem;
   margin-bottom: 0.5rem;
 }
 
 .task p {
-  font-size: 1.4rem; /* Slightly larger text */
+  font-size: 1.4rem;
   color: var(--secondary-color);
 }
 
 .tasks .task a {
-  /* Link for task title */
   text-decoration: none;
   color: var(--text-color);
   transition: color 0.2s ease-in-out;
@@ -171,31 +188,29 @@ h3 {
   padding-top: 3rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Spacing between detail lines */
+  gap: 1rem;
 }
 
 .detail p {
-  font-size: 1.8rem; /* Larger text for details */
+  font-size: 1.8rem;
   line-height: 1.5;
 }
 
 .detail div {
-  /* Div containing edit/delete links */
   margin-top: 2rem;
   display: flex;
-  gap: 1.5rem; /* Space between buttons */
+  gap: 1.5rem;
 }
 
-/* --- Form Styling (New Section) --- */
+/* --- Form Styling --- */
 form {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Space between form fields */
+  gap: 1.5rem;
 }
 
 form p {
-  /* Target paragraphs wrapping form fields by default from {{ form }} */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -209,6 +224,7 @@ form label {
 }
 
 form input[type="text"],
+form input[type="password"], /* Added password type */
 form input[type="date"],
 form textarea,
 form select {
@@ -217,27 +233,28 @@ form select {
   font-size: 1.6rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  box-sizing: border-box; /* Ensure padding doesn't push width */
+  box-sizing: border-box;
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 form input[type="text"]:focus,
+form input[type="password"]:focus, /* Added password type */
 form input[type="date"]:focus,
 form textarea:focus,
 form select:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Focus glow */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 form textarea {
   min-height: 10rem;
-  resize: vertical; /* Allow vertical resizing */
+  resize: vertical;
 }
 
-/* --- Button Styling (New Section) --- */
+/* --- Button Styling --- */
 .btn {
-  display: inline-block; /* For a tags behaving as buttons */
+  display: inline-block;
   padding: 1rem 2rem;
   font-size: 1.6rem;
   font-weight: bold;
@@ -245,10 +262,10 @@ form textarea {
   text-decoration: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  border: 1px solid transparent; /* Default transparent border */
+  border: 1px solid transparent;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
     border-color 0.2s ease-in-out;
-  margin-top: 1.5rem; /* Space above form buttons */
+  margin-top: 1.5rem;
 }
 
 .btn-primary {
@@ -256,7 +273,7 @@ form textarea {
   color: #fff;
 }
 .btn-primary:hover {
-  background-color: #0056b3; /* Darker blue */
+  background-color: #0056b3;
   border-color: #0056b3;
 }
 
@@ -265,7 +282,7 @@ form textarea {
   color: #fff;
 }
 .btn-success:hover {
-  background-color: #218838; /* Darker green */
+  background-color: #218838;
   border-color: #218838;
 }
 
@@ -274,7 +291,7 @@ form textarea {
   color: #fff;
 }
 .btn-danger:hover {
-  background-color: #c82333; /* Darker red */
+  background-color: #c82333;
   border-color: #c82333;
 }
 
@@ -283,7 +300,7 @@ form textarea {
   color: #fff;
 }
 .btn-secondary:hover {
-  background-color: #5a6268; /* Darker grey */
+  background-color: #5a6268;
   border-color: #545b62;
 }
 
@@ -296,14 +313,14 @@ form textarea {
   border-color: #117a8b;
 }
 
-/* Specific styling for the actual <button> tag in forms */
+/* Specific styling for submit buttons within forms */
+form input[type="submit"], /* Added input[type="submit"] here */
 form button[type="submit"] {
-  align-self: flex-start; /* Align to the left within the form */
-  margin-top: 2rem; /* More space above the submit button */
-  padding: 1.2rem 2.5rem; /* Slightly larger padding for submit buttons */
+  align-self: flex-start;
+  margin-top: 2rem;
+  padding: 1.2rem 2.5rem;
   font-size: 1.8rem;
-  border: none; /* Remove default button border */
-  /* Use primary button style */
+  border: none;
   background-color: var(--primary-color);
   color: #fff;
   border-radius: var(--radius-md);
@@ -311,6 +328,7 @@ form button[type="submit"] {
   transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
+form input[type="submit"]:hover,
 form button[type="submit"]:hover {
   background-color: #0056b3;
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
@@ -334,51 +352,70 @@ form button[type="submit"]:hover {
 
 .delete-confirmation form {
   display: flex;
-  flex-direction: row; /* Buttons side-by-side */
+  flex-direction: row;
   justify-content: center;
   gap: 2rem;
-  padding: 0; /* Remove form padding from general form rule */
+  padding: 0;
 }
 
 .delete-confirmation form .btn {
-  margin-top: 0; /* Remove top margin for these buttons */
+  margin-top: 0;
+}
+
+/* --- Message Styling (for login error) --- */
+.message {
+  background-color: #ffe0b2; /* Light orange background */
+  color: #e65100; /* Darker orange text */
+  padding: 1.5rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 2rem; /* Space below the message */
+  font-size: 1.6rem;
+  text-align: center;
+  border: 1px solid #ffb74d;
 }
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
   html {
-    font-size: 58%; /* Smaller base font for tablets */
+    font-size: 58%;
   }
 
   .container {
     margin: 1rem;
   }
+
+  nav .nav-links,
+  nav .auth-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 480px) {
   html {
-    font-size: 55%; /* Even smaller base font for mobile */
+    font-size: 55%;
   }
 
   header,
   .tasks,
   .detail,
   form {
-    padding: 1.5rem; /* Reduce padding on smaller screens */
-  }
-
-  nav {
-    flex-direction: column; /* Stack nav links */
-    gap: 1rem;
+    padding: 1.5rem;
   }
 
   .tasks .task {
-    flex-direction: column; /* Ensure tasks stack */
+    flex-direction: column;
     align-items: flex-start;
   }
 
   .detail div {
-    flex-direction: column; /* Stack edit/delete buttons */
+    flex-direction: column;
     gap: 1rem;
   }
 
@@ -386,7 +423,8 @@ form button[type="submit"]:hover {
     flex-direction: column;
   }
 
+  form input[type="submit"],
   form button[type="submit"] {
-    width: 100%; /* Full width button on small screens */
+    width: 100%;
   }
 }
