@@ -1,0 +1,22 @@
+{% extends "tasks/main.html" %}
+
+{% block main %}
+  <section class="tasks">
+    <div style="margin-bottom: 3rem;">
+        <a href="{% url 'create_task' %}" class="btn btn-success">Add New Task</a>
+    </div>
+
+    {% for task in tasks %}
+    <div class="task">
+      <div>
+        <a href="{% url 'detail' task.id %}"><h3>{{ task.title }}</h3></a>
+        <p>Priority: {{ task.priority }}</p>
+      </div>
+      <div>
+        <p>Status: {{ task.status }}</p>
+        <p>Due Date: {{ task.due_date }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+{% endblock main %}

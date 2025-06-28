@@ -1,0 +1,392 @@
+/* style.css */
+
+/* --- Variables --- */
+:root {
+  --primary-color: #007bff; /* Blue */
+  --secondary-color: #6c757d; /* Grey */
+  --success-color: #28a745; /* Green */
+  --danger-color: #dc3545; /* Red */
+  --info-color: #17a2b8; /* Cyan */
+  --light-bg: #f8f9fa;
+  --dark-bg: #343a40;
+  --text-color: #212529;
+  --border-color: #dee2e6;
+  --radius-sm: 0.3rem;
+  --radius-md: 0.5rem;
+}
+
+/* --- Universal Resets & Base Styles --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Changed from inherit for clarity */
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Use min-height to allow content to push body height */
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Slightly more modern font */
+  background-color: var(--light-bg);
+  color: var(--text-color);
+  padding: 2rem; /* Add some padding around the main container */
+}
+
+/* --- Container Layout --- */
+.container {
+  width: 100%; /* Make it fluid for responsiveness */
+  max-width: 80rem; /* Set a max-width for larger screens */
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  min-height: 40rem;
+  display: flex;
+  flex-direction: column; /* To stack header, nav, and content */
+}
+
+/* --- Header & Navigation --- */
+header {
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--dark-bg); /* Dark background for header */
+  padding: 1rem 2rem; /* Consistent padding */
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+nav {
+  display: flex;
+  gap: 2rem; /* Increased gap */
+  align-items: center;
+}
+
+nav a {
+  font-size: 1.8rem; /* Slightly larger nav links */
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff; /* White text for dark background */
+  transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: var(--primary-color); /* Highlight on hover */
+}
+
+/* --- Main Content Sections --- */
+.tasks,
+.detail,
+.form-section {
+  /* Added .form-section for forms */
+  padding: 2rem;
+  flex-grow: 1; /* Allows content sections to take available space */
+}
+
+/* --- Task List Specifics --- */
+.tasks {
+  padding-top: 3rem; /* More space above tasks list */
+}
+
+.tasks .task {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically on small screens */
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to the start */
+  margin-bottom: 2.5rem; /* More space between tasks */
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed var(--border-color); /* Subtle separator */
+}
+
+.tasks .task:last-child {
+  margin-bottom: 0;
+  border-bottom: none; /* No border for the last item */
+}
+
+.tasks .task > div {
+  /* Target the div wrappers inside .task */
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* Space between elements within task details */
+}
+
+.tasks .task > div:first-child {
+  margin-bottom: 1.5rem; /* Space between title/priority and status/due date on stacked layout */
+}
+
+/* When screen is wide enough, put them side by side */
+@media (min-width: 600px) {
+  .tasks .task {
+    flex-direction: row;
+    align-items: center; /* Center vertically when side-by-side */
+  }
+  .tasks .task > div:first-child {
+    margin-bottom: 0;
+  }
+}
+
+h1 {
+  font-size: 2.8rem; /* Larger heading */
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+h3 {
+  font-size: 2.2rem; /* Slightly larger task title */
+  margin-bottom: 0.5rem;
+}
+
+.task p {
+  font-size: 1.4rem; /* Slightly larger text */
+  color: var(--secondary-color);
+}
+
+.tasks .task a {
+  /* Link for task title */
+  text-decoration: none;
+  color: var(--text-color);
+  transition: color 0.2s ease-in-out;
+}
+
+.tasks .task a:hover {
+  color: var(--primary-color);
+}
+
+/* --- Detail Page Specifics --- */
+.detail {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Spacing between detail lines */
+}
+
+.detail p {
+  font-size: 1.8rem; /* Larger text for details */
+  line-height: 1.5;
+}
+
+.detail div {
+  /* Div containing edit/delete links */
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.5rem; /* Space between buttons */
+}
+
+/* --- Form Styling (New Section) --- */
+form {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Space between form fields */
+}
+
+form p {
+  /* Target paragraphs wrapping form fields by default from {{ form }} */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+form label {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+form input[type="text"],
+form input[type="date"],
+form textarea,
+form select {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-sizing: border-box; /* Ensure padding doesn't push width */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form textarea:focus,
+form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Focus glow */
+}
+
+form textarea {
+  min-height: 10rem;
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* --- Button Styling (New Section) --- */
+.btn {
+  display: inline-block; /* For a tags behaving as buttons */
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent; /* Default transparent border */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
+  margin-top: 1.5rem; /* Space above form buttons */
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker blue */
+  border-color: #0056b3;
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: #fff;
+}
+.btn-success:hover {
+  background-color: #218838; /* Darker green */
+  border-color: #218838;
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+.btn-danger:hover {
+  background-color: #c82333; /* Darker red */
+  border-color: #c82333;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+.btn-secondary:hover {
+  background-color: #5a6268; /* Darker grey */
+  border-color: #545b62;
+}
+
+.btn-info {
+  background-color: var(--info-color);
+  color: #fff;
+}
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+/* Specific styling for the actual <button> tag in forms */
+form button[type="submit"] {
+  align-self: flex-start; /* Align to the left within the form */
+  margin-top: 2rem; /* More space above the submit button */
+  padding: 1.2rem 2.5rem; /* Slightly larger padding for submit buttons */
+  font-size: 1.8rem;
+  border: none; /* Remove default button border */
+  /* Use primary button style */
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+form button[type="submit"]:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+/* --- Delete Confirmation Specifics --- */
+.delete-confirmation {
+  padding: 3rem;
+  text-align: center;
+}
+
+.delete-confirmation h2 {
+  color: var(--danger-color);
+  margin-bottom: 1.5rem;
+}
+
+.delete-confirmation p {
+  font-size: 1.8rem;
+  margin-bottom: 3rem;
+}
+
+.delete-confirmation form {
+  display: flex;
+  flex-direction: row; /* Buttons side-by-side */
+  justify-content: center;
+  gap: 2rem;
+  padding: 0; /* Remove form padding from general form rule */
+}
+
+.delete-confirmation form .btn {
+  margin-top: 0; /* Remove top margin for these buttons */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  html {
+    font-size: 58%; /* Smaller base font for tablets */
+  }
+
+  .container {
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 55%; /* Even smaller base font for mobile */
+  }
+
+  header,
+  .tasks,
+  .detail,
+  form {
+    padding: 1.5rem; /* Reduce padding on smaller screens */
+  }
+
+  nav {
+    flex-direction: column; /* Stack nav links */
+    gap: 1rem;
+  }
+
+  .tasks .task {
+    flex-direction: column; /* Ensure tasks stack */
+    align-items: flex-start;
+  }
+
+  .detail div {
+    flex-direction: column; /* Stack edit/delete buttons */
+    gap: 1rem;
+  }
+
+  .delete-confirmation form {
+    flex-direction: column;
+  }
+
+  form button[type="submit"] {
+    width: 100%; /* Full width button on small screens */
+  }
+}
