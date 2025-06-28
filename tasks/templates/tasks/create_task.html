@@ -1,8 +1,12 @@
 {% extends "tasks/main.html" %}
 
 {% block main %}
-<form action="{% url 'create_task' %}" method="POST">
-  {% csrf_token %} {{ form }}
-  <button type="submit">Add</button>
-</form>
+<section class="form-section"> {# Use a class for consistent padding #}
+  <h2>Create New Task</h2>
+  <form action="{% url 'create_task' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }} {# THIS IS IMPORTANT for easy form styling with CSS #}
+    <button type="submit" class="btn btn-primary">Add Task</button>
+  </form>
+</section>
 {% endblock main %}
