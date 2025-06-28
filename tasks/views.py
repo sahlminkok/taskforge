@@ -3,6 +3,9 @@ from .models import Task
 from .forms import TaskForm
 
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect('users:login')
+
     tasks = Task.objects.all()
     context = { 'tasks': tasks }
     return render(request, 'tasks/index.html', context)
