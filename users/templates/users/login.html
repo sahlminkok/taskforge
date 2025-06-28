@@ -1,0 +1,14 @@
+{% extends "tasks/main.html" %}
+
+{% block main %}
+  {% if message %}
+    <div>{{ message }}</div>
+  {% endif %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Enter your username...">
+    <input type="password" name="password" placeholder="Enter your password...">
+    <input type="submit" value="Login">
+  </form>
+{% endblock main %}
